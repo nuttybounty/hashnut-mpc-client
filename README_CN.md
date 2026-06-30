@@ -30,13 +30,13 @@ go build -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0" -o mpc-gui .
 ```bash
 # macOS ARM (Apple Silicon) - 原生编译
 CGO_ENABLED=1 GOARCH=arm64 go build \
-  -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0" \
-  -o bin/mpc-gui-darwin-arm64 ./cmd/gui
+  -ldflags "-X main.buildEnv=mainnet -X main.version=v1.0.0" \
+  -o bin/mpc-gui ./cmd/gui
 
 # macOS x86_64 (Intel) - 在 ARM 上交叉编译
 CGO_ENABLED=1 GOARCH=amd64 go build \
-  -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0" \
-  -o bin/mpc-gui-darwin-amd64 ./cmd/gui
+  -ldflags "-X main.buildEnv=mainnet -X main.version=v1.0.0" \
+  -o bin/mpc-gui ./cmd/gui
 ```
 
 ### Windows（在 macOS 上交叉编译）
@@ -46,8 +46,8 @@ CGO_ENABLED=1 GOARCH=amd64 go build \
 ```bash
 # Windows x86_64
 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc GOOS=windows GOARCH=amd64 go build \
-  -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0 -H windowsgui" \
-  -o bin/mpc-gui-amd64.exe ./cmd/gui
+  -ldflags "-X main.buildEnv=mainnet -X main.version=v1.0.0 -H windowsgui" \
+  -o bin/mpc-gui.exe ./cmd/gui
 ```
 
 > `-H windowsgui` 参数可以避免在 Windows 上双击运行时弹出命令行黑窗口。
@@ -58,7 +58,7 @@ CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc GOOS=windows GOARCH=amd64 go build \
 
 ```bash
 CGO_ENABLED=1 go build ^
-  -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0 -H windowsgui" ^
+  -ldflags "-X main.buildEnv=mainnet -X main.version=v1.0.0 -H windowsgui" ^
   -o bin\mpc-gui.exe .\cmd\gui
 ```
 
@@ -102,10 +102,10 @@ macOS 可能会阻止运行未签名的二进制文件。解决方法：
 
 ```bash
 # 移除隔离属性
-xattr -cr mpc-gui-darwin-arm64
+xattr -cr mpc-gui
 
 # 然后运行
-./mpc-gui-darwin-arm64
+./mpc-gui
 ```
 
 或者：在 Finder 中右键点击二进制文件，选择「打开」，然后确认。

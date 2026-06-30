@@ -30,13 +30,13 @@ The `buildEnv` parameter determines the backend server:
 ```bash
 # macOS ARM (Apple Silicon) - native
 CGO_ENABLED=1 GOARCH=arm64 go build \
-  -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0" \
-  -o bin/mpc-gui-darwin-arm64 ./cmd/gui
+  -ldflags "-X main.buildEnv=mainnet -X main.version=v1.0.0" \
+  -o bin/mpc-gui ./cmd/gui
 
 # macOS x86_64 (Intel) - cross-compile on ARM
 CGO_ENABLED=1 GOARCH=amd64 go build \
-  -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0" \
-  -o bin/mpc-gui-darwin-amd64 ./cmd/gui
+  -ldflags "-X main.buildEnv=mainnet -X main.version=v1.0.0" \
+  -o bin/mpc-gui ./cmd/gui
 ```
 
 ### Windows (cross-compile on macOS)
@@ -46,8 +46,8 @@ Requires mingw-w64: `brew install mingw-w64`
 ```bash
 # Windows x86_64
 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc GOOS=windows GOARCH=amd64 go build \
-  -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0 -H windowsgui" \
-  -o bin/mpc-gui-amd64.exe ./cmd/gui
+  -ldflags "-X main.buildEnv=mainnet -X main.version=v1.0.0 -H windowsgui" \
+  -o bin/mpc-gui.exe ./cmd/gui
 ```
 
 > The `-H windowsgui` flag prevents a console window from appearing when double-clicking the `.exe` on Windows.
@@ -58,7 +58,7 @@ Build on Windows using MSYS2 MinGW-w64 terminal:
 
 ```bash
 CGO_ENABLED=1 go build ^
-  -ldflags "-X main.buildEnv=testnet -X main.version=v1.0.0 -H windowsgui" ^
+  -ldflags "-X main.buildEnv=mainnet -X main.version=v1.0.0 -H windowsgui" ^
   -o bin\mpc-gui.exe .\cmd\gui
 ```
 
@@ -102,10 +102,10 @@ macOS may block unsigned binaries. To run the client:
 
 ```bash
 # Remove quarantine attribute
-xattr -cr mpc-gui-darwin-arm64
+xattr -cr mpc-gui
 
 # Then run
-./mpc-gui-darwin-arm64
+./mpc-gui
 ```
 
 Or: right-click the binary in Finder, select "Open", then confirm.
