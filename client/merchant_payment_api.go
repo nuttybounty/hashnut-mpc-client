@@ -9,11 +9,10 @@ import (
 	"time"
 )
 
-// CoinInfoItem 后端返回的 token 信息
+// CoinInfoItem 后端返回的 token 信息 (CoinInfoV4DTO)
 type CoinInfoItem struct {
-	Chain           string      `json:"chain"`
-	ChainCode       string      `json:"chainCode"`
-	CoinCode        string      `json:"coinCode"`
+	BlockChain      string      `json:"blockChain"`
+	TokenSymbol     string      `json:"tokenSymbol"`
 	ContractAddress string      `json:"contractAddress"`
 	CoinDesc        string      `json:"coinDesc"`
 	Decimals        json.Number `json:"decimals"`
@@ -91,7 +90,7 @@ func (mc *MerchantClient) SubmitAddReceiptWallets(ctx context.Context, chain, sp
 // QueryCoinInfo 从后端查询指定链支持的 token 列表
 func (mc *MerchantClient) QueryCoinInfo(ctx context.Context, chain string) ([]CoinInfoItem, error) {
 	data, err := mc.doPostJSON(ctx, "/api/v4.0.0/config/coins/query", map[string]interface{}{
-		"chain": chain,
+		"blockChain": chain,
 	})
 	if err != nil {
 		return nil, err

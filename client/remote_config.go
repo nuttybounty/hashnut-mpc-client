@@ -185,7 +185,7 @@ func (r *RemoteConfigMgr) fetchChainConfigs(mc *MerchantClient, ctx context.Cont
 
 // 后端 RPC 配置响应结构
 type rpcConfigResp struct {
-	Chain        string `json:"chain"`
+	BlockChain   string `json:"blockChain"`
 	RpcUrl       string `json:"rpcUrl"`
 	GrpcEndpoint string `json:"grpcEndpoint,omitempty"` // Tron gRPC 直连地址
 	ApiKey       string `json:"apiKey,omitempty"`
@@ -209,7 +209,7 @@ func (r *RemoteConfigMgr) fetchRpcConfigs(mc *MerchantClient, ctx context.Contex
 	defer r.mu.Unlock()
 
 	for _, item := range items {
-		chain := strings.ToUpper(item.Chain)
+		chain := strings.ToUpper(item.BlockChain)
 		if strings.Contains(chain, "TRON") {
 			// Tron: 优先使用 grpcEndpoint（gRPC 直连），fallback 到 rpcUrl
 			endpoint := item.GrpcEndpoint

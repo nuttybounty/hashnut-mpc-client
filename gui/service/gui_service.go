@@ -314,8 +314,8 @@ func (s *GUIService) ListTokensByChain(chain string) ([]TokenInfo, error) {
 	var result []TokenInfo
 	for _, c := range coins {
 		result = append(result, TokenInfo{
-			Symbol:   c.CoinCode,
-			Chain:    c.Chain,
+			Symbol:   c.TokenSymbol,
+			Chain:    c.BlockChain,
 			Contract: c.ContractAddress,
 			Name:     c.CoinDesc,
 		})
