@@ -1,4 +1,6 @@
 .idea
+.claude
+.vscode
 .DS_Store
 bin/
 doc/
